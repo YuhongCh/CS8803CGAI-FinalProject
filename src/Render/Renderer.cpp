@@ -145,7 +145,7 @@ GLuint Renderer::CreateShaderProgram(const char* vp, const char* fp) {
     return program;
 }
 
-void Renderer::RenderPoints(const std::vector<Vector3>& points, const Matrix4& projMatrix, const Scalar& pointSize, const Color& color) const {
+void Renderer::RenderPoints(const std::vector<Vector3>& points, const Matrix4& mvpMatrix, const Scalar& pointSize, const Color& color) const {
     if (points.empty()) return;
 
     GLuint program = program = CreateShaderProgram("Shader/BasicSceneVertex.glsl", "Shader/BasicSceneFragment.glsl");
@@ -170,7 +170,7 @@ void Renderer::RenderPoints(const std::vector<Vector3>& points, const Matrix4& p
     GLint mvpMatrixLoc = glGetUniformLocation(program, "mvpMatrix");
     glUniform1f(pointSizeLoc, pointSize);
     glUniform4f(pixelColorLoc, r, g, b, a);
-    glUniformMatrix4fv(mvpMatrixLoc, 1, GL_FALSE, projMatrix.data());
+    glUniformMatrix4fv(mvpMatrixLoc, 1, GL_FALSE, mvpMatrix.data());
 
     // Draw the points as GL_POINTS (each vertex is a circle center; you'll need a fragment shader if you want them to appear as circles).
     glDrawArrays(GL_POINTS, 0, static_cast<GLsizei>(points.size()));

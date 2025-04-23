@@ -12,7 +12,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/include/Eigen/include
   ${CMAKE_SOURCE_DIR}/include/glad/include
   ${CMAKE_SOURCE_DIR}/include/GLFW/include
-  ${CMAKE_SOURCE_DIR}/include/json/include
+  ${CMAKE_SOURCE_DIR}/include/tinyply/include
 )
 
 # compile glad
@@ -34,11 +34,11 @@ FetchContent_MakeAvailable(glfw)
 
 # Add eigen and json libraries
 add_library(Eigen      INTERFACE)
-add_library(nlohmann_json INTERFACE)
+add_library(tinyply INTERFACE)
 
 # 只需要把它们的 include 路径传递下去
 target_include_directories(Eigen       INTERFACE ${CMAKE_SOURCE_DIR}/include/Eigen)
-target_include_directories(nlohmann_json INTERFACE ${CMAKE_SOURCE_DIR}/include/json)
+target_include_directories(tinyply INTERFACE ${CMAKE_SOURCE_DIR}/include/tinyply)
 
 find_package(OpenGL REQUIRED)
 
@@ -56,6 +56,6 @@ target_link_libraries(FinalProject
     glad
     glfw
     Eigen
-    nlohmann_json
+    tinyply
     OpenGL::GL
 )
