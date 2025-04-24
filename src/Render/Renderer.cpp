@@ -228,3 +228,40 @@ void Renderer::RenderLines(const std::vector<Vector3>& points, const std::vector
     glDeleteBuffers(1, &EBO);
     glDeleteProgram(program);
 }
+
+void Renderer::RenderParticles(const std::vector<Particle<3>>& particles, const Matrix4& mvpMatrix, const Scalar& pointSize, const Color& color) const {
+    if (particles.empty()) return;
+
+    GLuint program = program = CreateShaderProgram("Shader/BasicSceneVertex.glsl", "Shader/BasicSceneFragment.glsl");
+    glUseProgram(program);
+
+    GLuint VAO, VBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    // Bind and upload the data
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, particles.size() * sizeof(Particle<3>), particles.data(), GL_STATIC_DRAW);
+
+    // Set vertex attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle<3>), BUFFER_OFFSET(offsetof(Particle<3>, position)));
+    glEnableVertexAttribArray(0);
+
+    auto [r, g, b, a] = color.toScalar();
+    GLint pointSizeLoc = glGetUniformLocation(program, "pointSize");
+    GLint pixelColorLoc = glGetUniformLocation(program, "pixelColor");
+    GLint mvpMatrixLoc = glGetUniformLocation(program, "mvpMatrix");
+    glUniform1f(pointSizeLoc, pointSize);
+    glUniform4f(pixelColorLoc, r, g, b, a);
+    glUniformMatrix4fv(mvpMatrixLoc, 1, GL_FALSE, mvpMatrix.data());
+
+    // Draw the points as GL_POINTS (each vertex is a circle center; you'll need a fragment shader if you want them to appear as circles).
+    glDrawArrays(GL_POINTS, 0, static_cast<GLsizei>(particles.size()));
+
+    // Unbind and clean up the buffers
+    glBindVertexArray(0);
+    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteProgram(program);
+}

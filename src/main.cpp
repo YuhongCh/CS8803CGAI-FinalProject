@@ -1,10 +1,12 @@
 ﻿#include "Definition.h"
 #include "Render/Renderer.h"
 #include "Render/Camera.h"
+#include "PhysicsRules.h"
 
 
 int main() {
 	Camera camera;
+	camera.SetPosition(Vector3(0.0, 0.0, 5.0f));
 	camera.SetPerspective(45.0f, 1.0f, 0.1f, 100.0f);
 	Transform identityTransform;
 
@@ -22,12 +24,14 @@ int main() {
 	std::vector<Integer> indices = { 0, 1, 1, 5, 5, 4, 4, 0, 2, 3, 3, 7, 7, 6, 6, 2, 0, 2, 1, 3, 4, 6, 5, 7 };
 #endif
 
+	PhysicModel model;
 
 	while (rend.IsRendering()) {
 		rend.ClearScreen();
 		glfwPollEvents();
 
 		Matrix4 mvpMatrix = camera.GetMVPMatrix(identityTransform);
+		rend.RenderParticles(model.GetParticleSystem().GetParticles(), mvpMatrix, 30.0);
 		rend.RenderLines(points, indices, mvpMatrix, 5.0, Color::Black());
 
 		rend.LoadScreen();

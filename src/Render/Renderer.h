@@ -3,6 +3,7 @@
 #include "../Definition.h"
 #include "Color.h"
 #include "Camera.h"
+#include "../PhysicsRules.h"
 
 class Renderer {
 public:
@@ -29,6 +30,8 @@ public:
     void RenderPoints(const std::vector<Vector3>& points, const Matrix4& projMatrix = Matrix4::Identity(), const Scalar& pointSize = 5.0, const Color& color = Color::Gray()) const;
 
     void RenderLines(const std::vector<Vector3>& points, const std::vector<Integer>& indices, const Matrix4& projMatrix = Matrix4::Identity(), const Scalar& lineWidth = 5.0, const Color& color = Color::Gray()) const;
+
+    void RenderParticles(const std::vector<Particle<3>>& points, const Matrix4& projMatrix = Matrix4::Identity(), const Scalar& pointSize = 5.0, const Color& color = Color::Gray()) const;
 
 private:
     static std::string ReadShaderSource(const char* filePath);
