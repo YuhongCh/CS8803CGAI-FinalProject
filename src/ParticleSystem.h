@@ -28,13 +28,15 @@ public:
 	inline const VectorX<DIM>& GetPrevPosition(Integer index) const { return m_particle[index].position; }
 	inline const VectorX<DIM>& GetVelocity(Integer index) const { return m_particle[index].velocity; }
 	inline const Particle<DIM>& GetParticle(Integer index) const { return m_particle[index]; }
-	inline const Scalar& GetMass(Integer index) const { return m_particle[index].mass; }
+	inline const Scalar& GetMass(Integer index) const { return m_particle[index].isFixed ? 0.0 : m_particle[index].mass; }
 	inline Particle<DIM>& GetParticle(Integer index) { return m_particle[index]; }
+	inline bool IsFixed(Integer index) { return m_particle[index].isFixed; }
 
 	inline void SetPosition(Integer index, const VectorX<DIM>& position) { m_particle[index].position = position; }
 	inline void SetPrevPosition(Integer index, const VectorX<DIM>& prevPosition) { m_particle[index].prevPosition = prevPosition; }
 	inline void SetVelocity(Integer index, const VectorX<DIM>& velocity) { m_particle[index].velocity = velocity; }
 	inline void SetMass(Integer index, const Scalar& val) { m_particle[index].mass = val; }
+	inline void SetIsFixed(Integer index, bool val) { m_particle[index].isFixed = val; }
 
 	inline const Integer& NumParticles() const { return m_size; }
 

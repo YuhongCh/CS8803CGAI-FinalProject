@@ -9,6 +9,7 @@ PhysicModel::PhysicModel()
 {
     m_ps.SetPosition(0, { -0.6f, 0.5f, 0.0f });
     m_ps.SetVelocity(0, { 0,0,0 });
+    m_ps.SetIsFixed(0, true);
 
     m_ps.SetPosition(1, { -0.3, 0.5, 0.0 });
     m_ps.SetVelocity(1, { 0,0,0 });
@@ -21,6 +22,7 @@ PhysicModel::PhysicModel()
 
     m_ps.SetPosition(4, { 0.6, 0.5, 0.0f });
     m_ps.SetVelocity(4, { 0,0,0 });
+    m_ps.SetIsFixed(4, true);
 
     m_springs.resize(5);
     m_springs[1] = AddSpring(0, 1, 1.0f / 100.0f);
@@ -84,21 +86,19 @@ void PhysicModel::SolveSpring(const Spring& s, Scalar dt) {
     auto  ga = SpringConstraintGrad(s, s.a);
     auto  gb = SpringConstraintGrad(s, s.b);
 
-    float denom =
-        m_ps.GetMass(s.a) == 0 ? 0 :
-        (1.0f / m_ps.GetMass(s.a)) * ga.squaredNorm() +
-        m_ps.GetMass(s.b) == 0 ? 0 :
-        (1.0f / m_ps.GetMass(s.b)) * gb.squaredNorm() +
-        s.invStiffness / (dt * dt);
+    float invMassA = MathUtils::IsSmall(m_ps.GetMass(s.a)) ? 0.0 : 1.0f / m_ps.GetMass(s.a);
+    float invMassB = MathUtils::IsSmall(m_ps.GetMass(s.b)) ? 0.0 : 1.0f / m_ps.GetMass(s.b);
+    float denom = invMassA * ga.squaredNorm() + invMassB * gb.squaredNorm();
+    denom += s.invStiffness / (dt * dt);
 
     if (denom == 0.0f) return;
     float lambda = numer / denom;
 
     // PBD 位置更新
     m_ps.SetPosition(s.a,
-        m_ps.GetPosition(s.a) + lambda * (1.0f / m_ps.GetMass(s.a)) * ga);
+        m_ps.GetPosition(s.a) + lambda * invMassA * ga);
     m_ps.SetPosition(s.b,
-        m_ps.GetPosition(s.b) + lambda * (1.0f / m_ps.GetMass(s.b)) * gb);
+        m_ps.GetPosition(s.b) + lambda * invMassB * gb);
 }
 
 // --- Collision 约束 --- //
@@ -125,15 +125,17 @@ void PhysicModel::SolveCollisionConstraint(Integer i, Integer j,
     float   numer = -CollisionConstraint(pi, pj, cd);
     Vector3f g = CollisionConstraintGradient(pi, pj, cd);
 
+    float invMassA = MathUtils::IsSmall(m_ps.GetMass(i)) ? 0.0 : 1.0f / m_ps.GetMass(i);
+    float invMassB = MathUtils::IsSmall(m_ps.GetMass(j)) ? 0.0 : 1.0f / m_ps.GetMass(j);
     float denom =
-        (1.0f / m_ps.GetMass(i)) * g.squaredNorm() +
-        (1.0f / m_ps.GetMass(j)) * g.squaredNorm() +
+        invMassA * g.squaredNorm() +
+        invMassB * g.squaredNorm() +
         (1.0f / 1000.0f) / (dt * dt);
 
     if (denom == 0) return;
     float lambda = numer / denom;
-    m_ps.SetPosition(i, pi + lambda * (1.0f / m_ps.GetMass(i)) * g);
-    m_ps.SetPosition(j, pj - lambda * (1.0f / m_ps.GetMass(j)) * g);
+    m_ps.SetPosition(i, pi + lambda * invMassA * g);
+    m_ps.SetPosition(j, pj - lambda * invMassB * g);
 }
 
 // --- Ground 约束 --- //
@@ -143,8 +145,7 @@ float PhysicModel::Phi(const Vector3f& p) const {
         * std::sin(2 * PI * p.z()) - 0.5f);
 }
 
-float PhysicModel::GroundConstraint(const Vector3f& p, Scalar gd) const
-{
+float PhysicModel::GroundConstraint(const Vector3f& p, Scalar gd) const {
     float φ = Phi(p);
     return (φ < gd ? φ - gd : 0.0f);
 }
@@ -165,12 +166,11 @@ Vector3f PhysicModel::GroundConstraintGradient(const Vector3f& p,
 void PhysicModel::SolveGroundConstraint(Integer i, Scalar gd, Scalar dt) {
     float numer = -GroundConstraint(m_ps.GetPosition(i), gd);
     Vector3f g = GroundConstraintGradient(m_ps.GetPosition(i), gd);
-    float denom =
-        (1.0f / m_ps.GetMass(i)) * g.squaredNorm() + (1.0f / 1000.0f) / (dt * dt);
+    float invMass = MathUtils::IsSmall(m_ps.GetMass(i)) ? 0.0 : 1.0f / m_ps.GetMass(i);
+    float denom = invMass * g.squaredNorm() + (1.0f / 1000.0f) / (dt * dt);
     if (denom == 0) return;
     float λ = numer / denom;
-    m_ps.SetPosition(i,
-        m_ps.GetPosition(i) + λ * (1.0f / m_ps.GetMass(i)) * g);
+    m_ps.SetPosition(i, m_ps.GetPosition(i) + λ * invMass * g);
 }
 
 // —— 全部约束一次 solve —— //
@@ -193,4 +193,26 @@ float PhysicModel::DistToSegment(const Vector3f& p,
     Vector3f pa = p - a, ba = b - a;
     float h = MathUtils::Clamp(pa.dot(ba) / ba.dot(ba), 0.0f, 1.0f);
     return (pa - h * ba).norm();
+}
+
+void PhysicModel::Step(const Scalar& dt) {
+    for (int i = 0; i < 5; i++) {
+        // Update rope particles only; skip updating the mouse particle since it's fixed.
+        for (int j = 0; j < m_ps.NumParticles(); j++) {
+            Particle<3>& particle = m_ps.GetParticle(j);
+            if (!particle.isFixed) particle.velocity += dt * m_gravity;
+
+            particle.velocity *= exp(-m_damp * dt);
+            particle.prevPosition = particle.position;
+            particle.position += dt * particle.velocity;
+        }
+        SolveConstraints(dt);
+
+        for (int j = 0; j < m_ps.NumParticles(); j++) {
+            Particle<3>& particle = m_ps.GetParticle(j);
+            if (!particle.isFixed) {
+                particle.velocity = (particle.position - particle.prevPosition) / dt;
+            }
+        }
+    }
 }

@@ -36,6 +36,8 @@ public:
     float Phi(const Vector3f& p) const;
     float DistToSegment(const Vector3f& p, const Vector3f& a, const Vector3f& b) const;
 
+    void Step(const Scalar& dt);
+
     inline ParticleSystem<3>& GetParticleSystem() { return m_ps; }
 
 private:

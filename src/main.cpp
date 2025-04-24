@@ -30,6 +30,8 @@ int main() {
 		rend.ClearScreen();
 		glfwPollEvents();
 
+		model.Step(0.01);
+
 		Matrix4 mvpMatrix = camera.GetMVPMatrix(identityTransform);
 		rend.RenderParticles(model.GetParticleSystem().GetParticles(), mvpMatrix, 30.0);
 		rend.RenderLines(points, indices, mvpMatrix, 5.0, Color::Black());
