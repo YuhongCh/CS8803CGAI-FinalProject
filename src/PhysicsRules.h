@@ -12,7 +12,7 @@ struct Spring {
 
 class PhysicModel {
 public:
-    PhysicModel();
+    PhysicModel(const std::string& filename);
 
     Scalar Remap01(Scalar inp, Scalar start, Scalar end) const;
     Integer NearestParticle(const Vector3f& p) const;

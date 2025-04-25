@@ -112,6 +112,13 @@ constexpr Scalar INF = std::numeric_limits<Scalar>::infinity();
 #include <GLFW/glfw3.h>
 #pragma endregion
 
+#pragma region Json
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
+#pragma endregion
+
 #pragma region Common Utility
 #define BUFFER_OFFSET(offset) ((void *) (offset))
 

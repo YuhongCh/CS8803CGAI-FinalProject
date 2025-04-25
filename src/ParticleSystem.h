@@ -20,7 +20,7 @@ struct Particle {
 template <int DIM>
 class ParticleSystem {
 public:
-	ParticleSystem(Integer numParticles);
+	ParticleSystem(Integer numParticles = 0);
 
 	inline const std::vector<Particle<DIM>>& GetParticles() const { return m_particle; }
 

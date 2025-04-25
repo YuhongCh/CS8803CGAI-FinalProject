@@ -24,7 +24,7 @@ int main() {
 	std::vector<Integer> indices = { 0, 1, 1, 5, 5, 4, 4, 0, 2, 3, 3, 7, 7, 6, 6, 2, 0, 2, 1, 3, 4, 6, 5, 7 };
 #endif
 
-	PhysicModel model;
+	PhysicModel model("Config/basic.json");
 
 	while (rend.IsRendering()) {
 		rend.ClearScreen();

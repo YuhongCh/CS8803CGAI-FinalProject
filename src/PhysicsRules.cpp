@@ -1,34 +1,41 @@
 #include "PhysicsRules.h"
 
-PhysicModel::PhysicModel()
-    : m_ps(5),
-    m_damp(0.4f),
-    m_collisionDist(0.2f),
-    m_groundCollisionDist(0.1f),
-    m_gravity(0.0f, -1.0f, 0.0f)
-{
-    m_ps.SetPosition(0, { -0.6f, 0.5f, 0.0f });
-    m_ps.SetVelocity(0, { 0,0,0 });
-    m_ps.SetIsFixed(0, true);
 
-    m_ps.SetPosition(1, { -0.3, 0.5, 0.0 });
-    m_ps.SetVelocity(1, { 0,0,0 });
+PhysicModel::PhysicModel(const std::string& filename) {
+    json j = json::parse(std::ifstream(filename));
+    m_damp = j.at("damping").get<Scalar>();
+    m_collisionDist = j.at("collisionDistance").get<Scalar>();
+    m_groundCollisionDist = j.at("groundCollisionDistance").get<Scalar>();
 
-    m_ps.SetPosition(2, { -0, 0.5, 0.0 });
-    m_ps.SetVelocity(2, { 0,0,0 });
+    for (Integer di = 0; di < 3; ++di) {
+        m_gravity[di] = j.at("gravity")[di].get<Scalar>();
+    }
 
-    m_ps.SetPosition(3, { 0.3, 0.5, 0.0 });
-    m_ps.SetVelocity(3, { 0,0,0 });
+    const auto& particles = j.at("Particles");
+    m_ps.Resize(particles.size());
+    Integer index = 0;
+    for (const auto& particle : particles) {
+        Particle<3>& p = m_ps.GetParticle(index);
+        p.mass = particle.at("mass").get<Scalar>();
+        p.isFixed = particle.at("isFixed").get<bool>();
 
-    m_ps.SetPosition(4, { 0.6, 0.5, 0.0f });
-    m_ps.SetVelocity(4, { 0,0,0 });
-    m_ps.SetIsFixed(4, true);
+        for (Integer di = 0; di < 3; ++di) {
+            p.position[di] = particle.at("position")[di].get<Scalar>();
+            p.velocity[di] = particle.at("velocity")[di].get<Scalar>();
+        }
+        ++index;
+    }
 
-    m_springs.resize(5);
-    m_springs[1] = AddSpring(0, 1, 1.0f / 100.0f);
-    m_springs[2] = AddSpring(1, 2, 1.0f / 100.0f);
-    m_springs[3] = AddSpring(2, 3, 1.0f / 100.0f);
-    m_springs[4] = AddSpring(3, 4, 1.0f / 100.0f);
+    const auto& springs = j.at("Springs");
+    m_springs.resize(springs.size());
+    index = 0;
+    for (const auto& spring : springs) {
+        Integer a = spring.at("a").get<Integer>();
+        Integer b = spring.at("b").get<Integer>();
+        Scalar stiffness = spring.at("stiffness").get<Scalar>();
+        m_springs[index] = AddSpring(a, b, 1.0 / stiffness);
+        ++index;
+    }
 }
 
 Scalar PhysicModel::Remap01(Scalar inp, Scalar s, Scalar e) const {

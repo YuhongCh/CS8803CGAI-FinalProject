@@ -1,0 +1,70 @@
+{
+  "damping": 0.4,
+  "collisionDistance": 0.2,
+  "groundCollisionDistance":  0.1,
+  "gravity": [ 0.0, -1.0, 0.0 ],
+
+
+  "Particles": [
+    {
+      "position": [ -0.6, 0.5, 0.0 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "position": [ -0.3, 0.5, 0.0 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": false
+    },
+    {
+      "position": [ 0.0, 0.5, 0.0 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": false
+    },
+    {
+      "position": [ 0.3, 0.5, 0.0 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": false
+    },
+    {
+      "position": [ 0.6, 0.5, 0.0 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    }
+  ],
+
+  "Springs": [
+    {
+      "a": 0,
+      "b": 0, 
+      "stiffness": 100.0
+    },
+    {
+      "a": 0,
+      "b": 1,
+      "stiffness": 100.0
+    },
+    {
+      "a": 1,
+      "b": 2,
+      "stiffness": 100.0
+    },
+    {
+      "a": 2,
+      "b": 3,
+      "stiffness": 100.0
+    },
+    {
+      "a": 3,
+      "b": 4,
+      "stiffness": 100.0
+    }
+  ]
+
+
+}
