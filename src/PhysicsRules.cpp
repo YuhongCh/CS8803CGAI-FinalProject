@@ -6,6 +6,7 @@ PhysicModel::PhysicModel(const std::string& filename) {
     m_damp = j.at("damping").get<Scalar>();
     m_collisionDist = j.at("collisionDistance").get<Scalar>();
     m_groundCollisionDist = j.at("groundCollisionDistance").get<Scalar>();
+    m_groundCollisionMultiplier = j.at("groundCollisionMultiplier").get<Scalar>();
 
     for (Integer di = 0; di < 3; ++di) {
         m_gravity[di] = j.at("gravity")[di].get<Scalar>();
@@ -45,7 +46,7 @@ Scalar PhysicModel::Remap01(Scalar inp, Scalar s, Scalar e) const {
 Integer PhysicModel::NearestParticle(const Vector3f& p) const {
     Integer best = 1;
     float   bestDist = std::numeric_limits<float>::infinity();
-    for (Integer i = 1; i < m_ps.NumParticles(); ++i) {
+    for (Integer i = 0; i < m_ps.NumParticles(); ++i) {
         float d = (p - m_ps.GetPosition(i)).squaredNorm();
         if (d < bestDist) {
             bestDist = d;
@@ -165,7 +166,7 @@ Vector3f PhysicModel::GroundConstraintGradient(const Vector3f& p,
     if (¦Õ < gd) {
         float gx = -0.1f * 2 * PI * std::cos(2 * PI * p.x()) * std::sin(2 * PI * p.z());
         float gz = -0.1f * 2 * PI * std::cos(2 * PI * p.z()) * std::sin(2 * PI * p.x());
-        return { gx, 1.0f, gz };
+        return Vector3(gx, 1.0f, gz) * m_groundCollisionMultiplier;
     }
     return Vector3f::Zero();
 }

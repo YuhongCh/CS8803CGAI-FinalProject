@@ -47,4 +47,5 @@ private:
     Scalar m_collisionDist;
     Scalar m_groundCollisionDist;
     Vector3f m_gravity;
+    Scalar m_groundCollisionMultiplier;
 };

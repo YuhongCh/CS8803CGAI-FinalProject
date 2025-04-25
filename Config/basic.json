@@ -3,6 +3,7 @@
   "collisionDistance": 0.2,
   "groundCollisionDistance":  0.1,
   "gravity": [ 0.0, -1.0, 0.0 ],
+  "groundCollisionMultiplier":  0.1,
 
 
   "Particles": [
