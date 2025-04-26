@@ -8,13 +8,15 @@ struct Particle {
 	VectorX<DIM> position;
 	VectorX<DIM> prevPosition;
 	VectorX<DIM> velocity;
+	Scalar radius;
 	Scalar mass;
+	Integer group;
 	bool isFixed;
 
 	Particle()
 		: position(VectorX<DIM>::Zero()), 
 		prevPosition(VectorX<DIM>::Zero()),
-		velocity(VectorX<DIM>::Zero()),mass(1.0), isFixed(false) { }
+		velocity(VectorX<DIM>::Zero()),mass(1.0), radius(1.0), group(0), isFixed(false) { }
 };
 
 template <int DIM>
@@ -29,14 +31,21 @@ public:
 	inline const VectorX<DIM>& GetVelocity(Integer index) const { return m_particle[index].velocity; }
 	inline const Particle<DIM>& GetParticle(Integer index) const { return m_particle[index]; }
 	inline const Scalar& GetMass(Integer index) const { return m_particle[index].isFixed ? 0.0 : m_particle[index].mass; }
+	inline const Scalar& GetRadius(Integer index) const { return m_particle[index].radius; }
 	inline Particle<DIM>& GetParticle(Integer index) { return m_particle[index]; }
+	inline const Integer& GetGroup(Integer index) const { return m_particle[index].group; }
 	inline bool IsFixed(Integer index) { return m_particle[index].isFixed; }
+	inline const std::unordered_map<Integer, std::vector<Integer>>& GetGroupDictionary() const { return m_groupDict; }
 
 	inline void SetPosition(Integer index, const VectorX<DIM>& position) { m_particle[index].position = position; }
 	inline void SetPrevPosition(Integer index, const VectorX<DIM>& prevPosition) { m_particle[index].prevPosition = prevPosition; }
 	inline void SetVelocity(Integer index, const VectorX<DIM>& velocity) { m_particle[index].velocity = velocity; }
+	inline void SetRadius(Integer index, const Scalar& radius) { m_particle[index].radius = radius; }
 	inline void SetMass(Integer index, const Scalar& val) { m_particle[index].mass = val; }
+	inline void SetGroup(Integer index, const Integer& val) { m_particle[index].group = val; }
 	inline void SetIsFixed(Integer index, bool val) { m_particle[index].isFixed = val; }
+
+	inline void UpdateGroup();
 
 	inline const Integer& NumParticles() const { return m_size; }
 
@@ -48,5 +57,6 @@ public:
 private:
 	Integer m_size;
 	std::vector<Particle<DIM>> m_particle;
+	std::unordered_map<Integer, std::vector<Integer>> m_groupDict;
 };
 

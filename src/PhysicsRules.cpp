@@ -19,6 +19,8 @@ PhysicModel::PhysicModel(const std::string& filename) {
         Particle<3>& p = m_ps.GetParticle(index);
         p.mass = particle.at("mass").get<Scalar>();
         p.isFixed = particle.at("isFixed").get<bool>();
+        p.group = particle.at("group").get<Integer>();
+        p.radius = particle.at("radius").get<Scalar>();
 
         for (Integer di = 0; di < 3; ++di) {
             p.position[di] = particle.at("position")[di].get<Scalar>();
@@ -154,16 +156,16 @@ float PhysicModel::Phi(const Vector3f& p) const {
 }
 
 float PhysicModel::GroundConstraint(const Vector3f& p, Scalar gd) const {
-    float φ = Phi(p);
-    return (φ < gd ? φ - gd : 0.0f);
+    float phi = Phi(p);
+    return (phi < gd ? phi - gd : 0.0f);
 }
 
 Vector3f PhysicModel::GroundConstraintGradient(const Vector3f& p,
     Scalar gd) const
 {
     constexpr float PI = 3.14159265359f;
-    float φ = Phi(p);
-    if (φ < gd) {
+    float phi = Phi(p);
+    if (phi < gd) {
         float gx = -0.1f * 2 * PI * std::cos(2 * PI * p.x()) * std::sin(2 * PI * p.z());
         float gz = -0.1f * 2 * PI * std::cos(2 * PI * p.z()) * std::sin(2 * PI * p.x());
         return Vector3(gx, 1.0f, gz) * m_groundCollisionMultiplier;
@@ -177,8 +179,8 @@ void PhysicModel::SolveGroundConstraint(Integer i, Scalar gd, Scalar dt) {
     float invMass = MathUtils::IsSmall(m_ps.GetMass(i)) ? 0.0 : 1.0f / m_ps.GetMass(i);
     float denom = invMass * g.squaredNorm() + (1.0f / 1000.0f) / (dt * dt);
     if (denom == 0) return;
-    float λ = numer / denom;
-    m_ps.SetPosition(i, m_ps.GetPosition(i) + λ * invMass * g);
+    float lambda = numer / denom;
+    m_ps.SetPosition(i, m_ps.GetPosition(i) + lambda * invMass * g);
 }
 
 // —— 全部约束一次 solve —— //
@@ -189,9 +191,14 @@ void PhysicModel::SolveConstraints(Scalar dt) {
     for (Integer i = 1; i < m_ps.NumParticles(); ++i)
         SolveGroundConstraint(i, m_groundCollisionDist, dt);
 
-    for (Integer i = 1; i < m_ps.NumParticles() - 1; ++i)
-        for (Integer j = i + 1; j < m_ps.NumParticles(); ++j)
-            SolveCollisionConstraint(i, j, m_collisionDist, dt);
+    const auto& groupDict = m_ps.GetGroupDictionary();
+    for (const auto& groupPair : groupDict) {
+        const auto& indices = groupPair.second;
+        Integer n = indices.size();
+        for (Integer i = 0; i < n - 1; ++i)
+            for (Integer j = i + 1; j < n; ++j)
+                SolveCollisionConstraint(indices[i], indices[j], m_collisionDist, dt);
+    }
 }
 
 float PhysicModel::DistToSegment(const Vector3f& p,
