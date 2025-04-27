@@ -24,17 +24,22 @@ int main() {
 	std::vector<Integer> indices = { 0, 1, 1, 5, 5, 4, 4, 0, 2, 3, 3, 7, 7, 6, 6, 2, 0, 2, 1, 3, 4, 6, 5, 7 };
 #endif
 
-	PhysicModel model("Config/basic.json");
+	Integer frameIndex = 0;
+	PhysicModel model("Config/cloud.json");
+	//model.GetParticleSystem().WriteToFile("Data\Frame" + std::to_string(frameIndex++) + ".ply");
 
 	while (rend.IsRendering()) {
 		rend.ClearScreen();
 		glfwPollEvents();
+
 
 		model.Step(0.01);
 
 		Matrix4 mvpMatrix = camera.GetMVPMatrix(identityTransform);
 		rend.RenderParticles(model.GetParticleSystem().GetParticles(), mvpMatrix, 30.0);
 		rend.RenderLines(points, indices, mvpMatrix, 5.0, Color::Black());
+		//model.GetParticleSystem().WriteToFile("Data/Frame" + std::to_string(frameIndex++) + ".ply");
+		//if (frameIndex >= 100) break;
 
 		rend.LoadScreen();
 	}

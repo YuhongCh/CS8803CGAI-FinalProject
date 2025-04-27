@@ -27,6 +27,7 @@ using std::endl;
 #include <cstddef>
 #include <random>
 #include <memory>
+#include <filesystem>
 
 using Scalar = float;
 using Integer = int;

@@ -45,7 +45,7 @@ public:
 
 	void Resize(Integer size);
 
-	void WriteToFile(const std::string& filename, bool isAppend = false) const;
+	void WriteToFile(const std::string& filename) const;
 	void LoadFromLine(const std::string& line);
 
 private:

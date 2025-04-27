@@ -13,7 +13,7 @@ PhysicModel::PhysicModel(const std::string& filename) {
     }
 
     const auto& particles = j.at("Particles");
-    m_ps.Resize(particles.size());
+    m_ps.Resize(particles.size() + 1); // left index 0 empty for now
     Integer index = 0;
     for (const auto& particle : particles) {
         Particle<3>& p = m_ps.GetParticle(index);

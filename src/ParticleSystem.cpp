@@ -14,22 +14,32 @@ void ParticleSystem<DIM>::Resize(Integer size) {
 }
 
 template<int DIM>
-void ParticleSystem<DIM>::WriteToFile(const std::string& filename, bool isAppend) const {
+void ParticleSystem<DIM>::WriteToFile(const std::string& filename) const {
+	static_assert(DIM == 2 or DIM == 3);
+
+	std::filesystem::path p(filename);
+	std::filesystem::path parent = p.parent_path();
+	if (!parent.empty() && !std::filesystem::exists(parent)) {
+		std::filesystem::create_directories(parent);
+	}
+
 	std::ofstream writer;
-	if (isAppend) writer.open(filename, std::ios::out | std::ios::app);
-	else writer.open(filename, std::ios::out | std::ios::trunc);
+	writer.open(filename, std::ios::out | std::ios::trunc);
 
 	if (!writer.is_open()) {
 		throw std::runtime_error("Failed to open file: " + filename);
 	}
 
-	writer << m_particle.size() << "\n";
+	writer << "ply\nformat ascii 1.0\n";
+	writer << "element vertex " << m_particle.size() << "\n";
+	writer << "property float x\nproperty float y\nproperty float z\n";
+	writer << "end_header\n";
+
 	for (const Particle<DIM>& particle : m_particle) {
-		for (Integer di = 0; di < DIM; ++di) {
-			writer << particle.position[di] << ",";
-		}
+		Scalar z = 0.0;
+		if constexpr (DIM == 3) z = particle.position.z();
+		writer << particle.position.x() << " " << particle.position.y() << " " << z << "\n";
 	}
-	writer << "\n";
 	writer.close();
 }
 
