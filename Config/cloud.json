@@ -10,7 +10,7 @@
       "position": [ -0.5, 0.3, -0.35 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.9,
@@ -45,7 +45,7 @@
       "position": [ 0.3, -0.05, 0.8 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.9,
@@ -59,7 +59,7 @@
       "position": [ -0.45, -0.05, 0.17 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.9,
@@ -87,7 +87,7 @@
       "position": [ 0.25, 0.03, -0.8 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.4,
@@ -101,14 +101,14 @@
       "position": [ 0.54, -0.136, -0.031 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.4,
       "position": [ -0.429, -0.324, -0.702 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.4,
@@ -129,7 +129,7 @@
       "position": [ -0.219, 0.318, 0.165 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.6,
@@ -143,14 +143,14 @@
       "position": [ 0.043, 0.438, 0.193 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.4,
       "position": [ -0.319, -0.398, 0.322 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
-      "isFixed": true
+      "isFixed": false
     },
     {
       "radius": 0.4,
@@ -164,6 +164,167 @@
       "position": [ -0.1, 0.19, -1.0 ],
       "velocity": [ 0.0, 0.0, 0.0 ],
       "mass": 1.0,
+      "isFixed": false
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.5, 0.35, -0.35 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.3, -0.15, 0.7 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.275, -0.45, -0.19 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.096, -0.256, -0.983 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.5, 0.35, -0.4 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.3, -0.0, 0.8 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.268, -0.3, -0.402 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.45, -0.0, 0.17 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.45, 0.05, -0.78 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.13, -0.35, 0.313 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.41, 0.27, 0.28 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.25, 0.08, -0.8 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.045, -0.29, 0.83 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.54, -0.086, -0.031 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.429, -0.274, -0.702 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.577, -0.111, -0.325 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.044, 0.405, -0.648 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.219, 0.368, 0.165 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.055, 0.472, -0.245 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ 0.043, 0.488, 0.193 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.319, -0.348, 0.322 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.158, -0.387, -0.639 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
+      "isFixed": true
+    },
+    {
+      "radius": 0.01,
+      "position": [ -0.1, 0.24, -1.0 ],
+      "velocity": [ 0.0, 0.0, 0.0 ],
+      "mass": 1.0,
       "isFixed": true
     }
   ],
@@ -171,197 +332,312 @@
     {
       "a": 1,
       "b": 2,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 2,
       "b": 3,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 3,
       "b": 4,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 1,
       "b": 4,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 4,
       "b": 5,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 1,
       "b": 5,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 5,
       "b": 6,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 6,
       "b": 7,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 5,
       "b": 7,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 2,
       "b": 7,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 8,
       "b": 9,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 8,
       "b": 10,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 9,
       "b": 11,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 10,
       "b": 11,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 8,
       "b": 12,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 9,
       "b": 12,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 10,
       "b": 12,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 11,
       "b": 12,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 13,
       "b": 14,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 13,
       "b": 15,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 14,
       "b": 15,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 13,
       "b": 16,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 14,
       "b": 16,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 15,
       "b": 16,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 13,
       "b": 17,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 14,
       "b": 17,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 15,
       "b": 17,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 16,
       "b": 17,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 13,
       "b": 18,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 14,
       "b": 18,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 15,
       "b": 18,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 17,
       "b": 18,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 19,
       "b": 20,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 20,
       "b": 21,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 20,
       "b": 22,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 21,
       "b": 22,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 19,
       "b": 23,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 22,
       "b": 23,
-      "stiffness": 10000.0
+      "stiffness": 100.0
     },
     {
       "a": 21,
       "b": 23,
-      "stiffness": 10000.0
+      "stiffness": 100.0
+    },
+    {
+      "a": 1,
+      "b": 24,
+      "stiffness": 100.0
+    },
+    {
+      "a": 2,
+      "b": 25,
+      "stiffness": 100.0
+    },
+    {
+      "a": 3,
+      "b": 26,
+      "stiffness": 100.0
+    },
+    {
+      "a": 4,
+      "b": 27,
+      "stiffness": 100.0
+    },
+    {
+      "a": 5,
+      "b": 28,
+      "stiffness": 100.0
+    },
+    {
+      "a": 6,
+      "b": 29,
+      "stiffness": 100.0
+    },
+    {
+      "a": 7,
+      "b": 30,
+      "stiffness": 100.0
+    },
+    {
+      "a": 8,
+      "b": 31,
+      "stiffness": 100.0
+    },
+    {
+      "a": 9,
+      "b": 32,
+      "stiffness": 100.0
+    },
+    {
+      "a": 10,
+      "b": 33,
+      "stiffness": 100.0
+    },
+    {
+      "a": 11,
+      "b": 34,
+      "stiffness": 100.0
+    },
+    {
+      "a": 12,
+      "b": 35,
+      "stiffness": 100.0
+    },
+    {
+      "a": 13,
+      "b": 36,
+      "stiffness": 100.0
+    },
+    {
+      "a": 14,
+      "b": 37,
+      "stiffness": 100.0
+    },
+    {
+      "a": 15,
+      "b": 38,
+      "stiffness": 100.0
+    },
+    {
+      "a": 16,
+      "b": 39,
+      "stiffness": 100.0
+    },
+    {
+      "a": 17,
+      "b": 40,
+      "stiffness": 100.0
+    },
+    {
+      "a": 18,
+      "b": 41,
+      "stiffness": 100.0
+    },
+    {
+      "a": 19,
+      "b": 42,
+      "stiffness": 100.0
+    },
+    {
+      "a": 20,
+      "b": 43,
+      "stiffness": 100.0
+    },
+    {
+      "a": 21,
+      "b": 44,
+      "stiffness": 100.0
+    },
+    {
+      "a": 22,
+      "b": 45,
+      "stiffness": 100.0
+    },
+    {
+      "a": 23,
+      "b": 46,
+      "stiffness": 100.0
     }
   ]
 }
