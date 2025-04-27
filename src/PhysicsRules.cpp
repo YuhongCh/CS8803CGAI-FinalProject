@@ -19,7 +19,6 @@ PhysicModel::PhysicModel(const std::string& filename) {
         Particle<3>& p = m_ps.GetParticle(index);
         p.mass = particle.at("mass").get<Scalar>();
         p.isFixed = particle.at("isFixed").get<bool>();
-        p.group = particle.at("group").get<Integer>();
         p.radius = particle.at("radius").get<Scalar>();
 
         for (Integer di = 0; di < 3; ++di) {
@@ -191,14 +190,7 @@ void PhysicModel::SolveConstraints(Scalar dt) {
     for (Integer i = 1; i < m_ps.NumParticles(); ++i)
         SolveGroundConstraint(i, m_groundCollisionDist, dt);
 
-    const auto& groupDict = m_ps.GetGroupDictionary();
-    for (const auto& groupPair : groupDict) {
-        const auto& indices = groupPair.second;
-        Integer n = indices.size();
-        for (Integer i = 0; i < n - 1; ++i)
-            for (Integer j = i + 1; j < n; ++j)
-                SolveCollisionConstraint(indices[i], indices[j], m_collisionDist, dt);
-    }
+    // no between particle collision now
 }
 
 float PhysicModel::DistToSegment(const Vector3f& p,

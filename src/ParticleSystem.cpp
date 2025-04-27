@@ -14,14 +14,6 @@ void ParticleSystem<DIM>::Resize(Integer size) {
 }
 
 template<int DIM>
-void ParticleSystem<DIM>::UpdateGroup() {
-	m_groupDict.clear();
-	for (Integer pi = 0; pi < m_size; ++pi) {
-		m_groupDict[m_particle[pi].group].push_back(pi);
-	}
-}
-
-template<int DIM>
 void ParticleSystem<DIM>::WriteToFile(const std::string& filename, bool isAppend) const {
 	std::ofstream writer;
 	if (isAppend) writer.open(filename, std::ios::out | std::ios::app);
