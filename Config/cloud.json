@@ -1,0 +1,187 @@
+{
+    "damping": 0.4,
+    "collisionDistance": 0.2,
+    "groundCollisionDistance":  0.1,
+    "gravity": [ 0.0, -1.0, 0.0 ],
+    "groundCollisionMultiplier":  0.1,
+  
+  
+    "ParticlesOne": [
+      {
+        "position": [ -0.5, 0.3, -0.35 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      },
+      {
+        "position": [ -0.3, -0.1, 0.7 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": false
+      },
+      {
+        "position": [ -0.275, -0.4, -0.19 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": false
+      },
+      {
+        "position": [ -0.096, -0.206, -0.983 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": false
+      },
+      {
+        "position": [ 0.5, 0.3, -0.4 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      },
+      {
+        "position": [ 0.3, -0.05, 0.8 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      },
+      {
+        "position": [ 0.268, -0.35, -0.402 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      }
+    ],
+    "ParticlesTwo": [
+      {
+        "position": [ -0.45, -0.05, 0.17 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      },
+      {
+        "position": [ -0.45, 0.0, -0.78 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      },
+      {
+        "position": [ 0.13, -0.4, 0.313 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      },
+      {
+        "position": [ 0.41, 0.22, 0.28 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      },
+      {
+        "position": [ 0.25, 0.03, -0.8 ],
+        "velocity": [ 0.0, 0.0, 0.0 ],
+        "mass": 1.0,
+        "isFixed": true
+      }
+
+    ],
+    "ParticlesThree": [
+        {
+          "position": [ 0.045, -0.34, 0.83 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ 0.54, -0.136, -0.031 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ -0.429, -0.324, -0.702 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ -0.577, -0.161, -0.325 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ -0.044, 0.355, -0.648 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+            "position": [ -0.219, 0.318, 0.165 ],
+            "velocity": [ 0.0, 0.0, 0.0 ],
+            "mass": 1.0,
+            "isFixed": true
+        }
+      ],
+      "ParticlesFour": [
+        {
+          "position": [ 0.055, 0.422, -0.245 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ 0.043, 0.438, 0.193 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ -0.319, -0.398, 0.322 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ -0.158, -0.437, -0.639 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        },
+        {
+          "position": [ -0.1, 0.19, -1.0 ],
+          "velocity": [ 0.0, 0.0, 0.0 ],
+          "mass": 1.0,
+          "isFixed": true
+        }
+
+      ],
+    "Springs": [
+      {
+        "a": 0,
+        "b": 0, 
+        "stiffness": 100.0
+      },
+      {
+        "a": 0,
+        "b": 1,
+        "stiffness": 100.0
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "stiffness": 100.0
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "stiffness": 100.0
+      },
+      {
+        "a": 3,
+        "b": 4,
+        "stiffness": 100.0
+      }
+    ]
+  
+  
+  }
+  
